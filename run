@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Run this only once
+# xhost +local:docker
+
+# These variables are used for local docker installations
+export SOURCE_DIR="$HOME/work"
+export TARGET_DIR="/root/work"
+
+docker run -it --rm \
+--name gnuradio-hackrf \
+--net=host \
+-e DISPLAY=$DISPLAY \
+--mount type=bind,source=$SOURCE_DIR,target=$TARGET_DIR \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+--privileged -v /dev/bus/usb:/dev/bus/usb \
+john-belstner/gnuradio-hackrf \
+/bin/bash
