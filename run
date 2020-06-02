@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # Run this only once
-# xhost +local:docker
+if [ -z "$DOCKER_DISP" ]
+then
+    xhost +local:docker
+    export DOCKER_DISP="xhost +local:docker"
+fi
 
 # These variables are used for local docker installations
 export SOURCE_DIR="$HOME/work"
@@ -14,5 +18,5 @@ docker run -it --rm \
 --mount type=bind,source=$SOURCE_DIR,target=$TARGET_DIR \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
 --privileged -v /dev/bus/usb:/dev/bus/usb \
-john-belstner/gnuradio-hackrf \
+jbelstner/gnuradio-hackrf \
 /bin/bash
