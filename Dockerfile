@@ -10,7 +10,8 @@ USER root
 
 # Install OS dependencies and Python3 only
 RUN apt-get update \
-    && apt-get install -yq --no-install-recommends \
+    && apt-get upgrade -yq \
+    && apt-get install -yq \
         dumb-init \
         host \
         sudo \
@@ -22,6 +23,7 @@ RUN apt-get update \
         hackrf \
         libhackrf0 \
         libhackrf-dev \
+        gr-osmosdr \
         libcanberra-gtk-module \
         libcanberra-gtk3-module \
     && apt-get clean \
